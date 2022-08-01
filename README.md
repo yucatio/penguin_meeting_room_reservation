@@ -12,6 +12,7 @@
 - meetingRoomは存在するものであること
 - numAtendeeは必須
 - numAtendee1以上50以下
+- numAtendeeはmeetingRoomのcapacityを超えない
 - startは必須
 - 登録時、startは現在時刻より後
 - startを変更時、過去に変更できない
