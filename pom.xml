@@ -11,7 +11,7 @@
   </parent>
   <groupId>com.yucatio</groupId>
   <artifactId>penguin-meeting-room-prototype01</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>penguin-meeting-room-prototype01</name>
   <description>Prototype for Penguin meeting room</description>
   <properties>

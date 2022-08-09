@@ -17,8 +17,8 @@ public class ValidMeetingWithDbModelValidator
 
     boolean isValid = true;
 
-    isValid = validateStartTime(model, context) && isValid;
-    isValid = validateEndTIme(model, context) && isValid;
+    isValid &= validateStartTime(model, context);
+    isValid &= validateEndTIme(model, context);
 
     return isValid;
   }
