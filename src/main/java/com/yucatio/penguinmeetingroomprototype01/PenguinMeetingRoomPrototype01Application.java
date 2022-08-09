@@ -19,7 +19,7 @@ public class PenguinMeetingRoomPrototype01Application {
   }
 
   @Bean
-  public Validator localCalidatorFactoryBean(final AutowireCapableBeanFactory autowireCapableBeanFactory) {
+  public Validator localValidatorFactoryBean(final AutowireCapableBeanFactory autowireCapableBeanFactory) {
     ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
         .configure().constraintValidatorFactory(new SpringConstraintValidatorFactory(autowireCapableBeanFactory))
         .buildValidatorFactory();
