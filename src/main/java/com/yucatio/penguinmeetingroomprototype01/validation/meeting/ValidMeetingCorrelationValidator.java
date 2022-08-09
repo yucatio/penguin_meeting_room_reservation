@@ -14,30 +14,36 @@ public class ValidMeetingCorrelationValidator implements ConstraintValidator<Val
     context.disableDefaultConstraintViolation();
 
     boolean isValid = true;
+    
+    isValid &= validateStartAndEnd(meeting, context);
 
+    return isValid;
+  }
+
+  protected boolean validateStartAndEnd(Meeting meeting, ConstraintValidatorContext context) {
     if (meeting.getStart().compareTo(meeting.getEnd()) >= 0) {
       context
           .buildConstraintViolationWithTemplate(
               "{com.yucatio.penguinmeetingroomprototype01.validation.ValidMeetingCorrelation.endBeforeStart.message}")
           .addPropertyNode("start").addConstraintViolation();
-      isValid = false;
+      return false;
     } else if (meeting.getEnd().getTime() - meeting.getStart().getTime() < BusinessSpec.Meeting.MIN_MILLISEC) {
       context
           .buildConstraintViolationWithTemplate(
               "{com.yucatio.penguinmeetingroomprototype01.validation.ValidMeetingCorrelation.minMeetingTime.message}")
           .addPropertyNode("start").addConstraintViolation();
 
-      isValid = false;
+      return false;
     } else if (meeting.getEnd().getTime() - meeting.getStart().getTime() > BusinessSpec.Meeting.MAX_MILLISEC) {
       context
           .buildConstraintViolationWithTemplate(
               "{com.yucatio.penguinmeetingroomprototype01.validation.ValidMeetingCorrelation.maxMeetingTime.message}")
           .addPropertyNode("start").addConstraintViolation();
 
-      isValid = false;
+      return false;
     }
-
-    return isValid;
+    
+    return true;
   }
 
 }

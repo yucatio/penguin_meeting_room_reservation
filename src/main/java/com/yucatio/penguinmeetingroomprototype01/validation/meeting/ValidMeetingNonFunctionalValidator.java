@@ -34,8 +34,8 @@ public class ValidMeetingNonFunctionalValidator
 
     boolean isValid = true;
 
-    isValid = validMeetingRoomAndAtendee(model, context) && isValid;
-    isValid = validateOverlap(model, context) && isValid;
+    isValid &= validMeetingRoomAndAtendee(model, context);
+    isValid &= validateOverlap(model, context);
 
     return isValid;
   }
@@ -62,9 +62,9 @@ public class ValidMeetingNonFunctionalValidator
 
     boolean isValid = true;
 
-    isValid = validateNumAtendee(model, meetingRoom, context) && isValid;
+    isValid &= validateNumAtendee(model, meetingRoom, context);
 
-    return true;
+    return isValid;
   }
 
   protected boolean validateNumAtendee(MeetingTransitionModel model, Optional<MeetingRoom> meetingRoom,
