@@ -2,6 +2,80 @@
 
 会議室予約システムプロトタイプ
 
+## API
+### 会議(Meeting)
+
+#### 取得(GET)
+
+Request:
+
+```
+GET http://localhost:8080/meetings/1
+```
+
+Response:
+
+```
+{
+  "resultCode": "N000",
+  "result": {
+    "id": 1,
+    "subject": "event_1",
+    "meetingRoom": 1,
+    "numAtendee": 3,
+    "start": "2022-02-14T10:00:00+09:00",
+    "end": "2022-02-14T10:30:00+09:00"
+  }
+}
+```
+
+#### 新規作成(POST)
+Request:
+
+```
+POST http://localhost:8080/meetings
+
+{
+    "subject": "event_1",
+    "meetingRoom": 1,
+    "numAtendee": 5,
+    "start": "2022-09-14T11:30:00+09:00",
+    "end": "2022-09-14T12:30:00+09:00"
+}
+```
+
+Response:
+
+```
+{
+    "resultCode": "N000",
+    "newId": 3
+}
+```
+
+#### 部分更新(PUT)
+
+Request:
+
+```
+http://localhost:8080/meetings/3
+
+
+{
+    "subject": "event_update",
+    "numAtendee": 3
+}
+```
+
+Response:
+
+```
+{
+    "resultCode": "N000"
+}
+```
+
+
 ## Validation
 
 ### Meeting
