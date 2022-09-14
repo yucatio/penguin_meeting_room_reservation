@@ -1,5 +1,8 @@
 package com.yucatio.penguinmeetingroomprototype01.validation.meeting;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -13,11 +16,10 @@ public class ValidMeetingCorrelationValidator implements ConstraintValidator<Val
   public boolean isValid(Meeting meeting, ConstraintValidatorContext context) {
     context.disableDefaultConstraintViolation();
 
-    boolean isValid = true;
-    
-    isValid &= validateStartAndEnd(meeting, context);
+    List<Boolean> result = Arrays.asList(
+        validateStartAndEnd(meeting, context));
 
-    return isValid;
+    return result.stream().allMatch(Boolean::valueOf);
   }
 
   protected boolean validateStartAndEnd(Meeting meeting, ConstraintValidatorContext context) {
@@ -42,7 +44,6 @@ public class ValidMeetingCorrelationValidator implements ConstraintValidator<Val
 
       return false;
     }
-    
     return true;
   }
 
