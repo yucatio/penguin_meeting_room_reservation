@@ -60,7 +60,7 @@ class ValidMeetingCorrelationValidatorTest extends ValidMeetingCorrelationValida
       "2032-09-12T09:00:00+09:00, 2032-09-12T09:14:59+09:00, false",
       "2032-09-12T09:00:00+09:00, 2032-09-12T09:15:00+09:00, true",
       "2032-09-12T09:00:00+09:00, 2032-09-12T11:00:00+09:00, true",
-      "2032-09-12T09:00:00+09:00, 2032-09-12T11:00:01+09:00, false"
+      "2032-09-12T09:00:00+09:00, 2032-09-12T11:00:01+09:00, false",
   })
   void test_validateStartAndEnd(OffsetDateTime start, OffsetDateTime end, boolean expected) {
     Meeting meeting = new Meeting(1, "会議01", 1, 3, Date.from(start.toInstant()), Date.from(end.toInstant()));
