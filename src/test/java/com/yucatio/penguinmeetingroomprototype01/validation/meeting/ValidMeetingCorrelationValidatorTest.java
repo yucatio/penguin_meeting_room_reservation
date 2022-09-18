@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import com.yucatio.penguinmeetingroomprototype01.entity.Meeting;
 
-class ValidMeetingCorrelationValidatorTest extends ValidMeetingCorrelationValidator {
+class ValidMeetingCorrelationValidatorTest {
   ValidMeetingCorrelationValidator target;
 
   ConstraintValidatorContext context = mock(ConstraintValidatorContext.class);
