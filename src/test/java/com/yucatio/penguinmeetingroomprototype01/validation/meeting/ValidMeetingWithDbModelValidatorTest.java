@@ -91,9 +91,13 @@ class ValidMeetingWithDbModelValidatorTest {
 
   @ParameterizedTest
   @CsvSource({
+      // start and end not changed
       "2022-09-11T09:00:00+09:00, 2022-09-11T10:00:00+09:00, 2022-09-11T09:00:00+09:00, 2022-09-11T10:00:00+09:00, true",
+      // start same to now, start changed to past
       "2022-09-12T09:00:00+09:00, 2022-09-12T10:00:00+09:00, 2022-09-12T08:59:00+09:00, 2022-09-12T11:00:00+09:00, false",
+      // start is past. start changed to future
       "2022-09-12T08:59:00+09:00, 2022-09-12T10:00:00+09:00, 2022-09-12T09:01:00+09:00, 2022-09-12T11:00:00+09:00, false",
+      // start same to now, star chagned to future
       "2022-09-12T09:00:00+09:00, 2022-09-12T10:00:00+09:00, 2022-09-12T10:00:00+09:00, 2022-09-12T11:00:00+09:00, true",
   })
   void test_validateStartTime(OffsetDateTime dbStart, OffsetDateTime dbEnd,
@@ -125,9 +129,13 @@ class ValidMeetingWithDbModelValidatorTest {
 
   @ParameterizedTest
   @CsvSource({
+      // start and end not changed
       "2022-09-11T08:00:00+09:00, 2022-09-11T08:30:00+09:00, 2022-09-11T08:00:00+09:00, 2022-09-11T08:30:00+09:00, true",
+      // db end future, input end past
       "2022-09-12T08:00:00+09:00, 2022-09-12T10:00:00+09:00, 2022-09-12T08:00:00+09:00, 2022-09-12T08:59:00+09:00, false",
+      // db end past, input end future
       "2022-09-12T08:00:00+09:00, 2022-09-12T08:59:00+09:00, 2022-09-12T08:00:00+09:00, 2022-09-12T09:30:00+09:00, false",
+      // db end now, input end future
       "2022-09-12T08:00:00+09:00, 2022-09-12T09:00:00+09:00, 2022-09-12T08:00:00+09:00, 2022-09-12T09:30:00+09:00, true",
   })
   void test_validateEndTime(OffsetDateTime dbStart, OffsetDateTime dbEnd,
