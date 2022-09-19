@@ -2,7 +2,6 @@ package com.yucatio.penguinmeetingroomprototype01.validation.meeting;
 
 import java.time.Clock;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ValidMeetingWithDbModelValidator
   public boolean isValid(MeetingTransitionModel model, ConstraintValidatorContext context) {
     context.disableDefaultConstraintViolation();
     
-    List<Boolean> result = Arrays.asList(
+    List<Boolean> result = List.of(
         validateStartTime(model, context),
         validateEndTime(model, context));
 

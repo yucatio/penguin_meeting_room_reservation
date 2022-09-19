@@ -1,6 +1,5 @@
 package com.yucatio.penguinmeetingroomprototype01.validation.meeting;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.ConstraintValidator;
@@ -16,7 +15,7 @@ public class ValidMeetingCorrelationValidator implements ConstraintValidator<Val
   public boolean isValid(Meeting meeting, ConstraintValidatorContext context) {
     context.disableDefaultConstraintViolation();
 
-    List<Boolean> result = Arrays.asList(
+    List<Boolean> result = List.of(
         validateStartAndEnd(meeting, context));
 
     return result.stream().allMatch(Boolean::valueOf);
