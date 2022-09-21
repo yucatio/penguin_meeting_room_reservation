@@ -1,5 +1,6 @@
 package com.yucatio.penguinmeetingroomprototype01.validation.meeting;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.ConstraintValidator;
@@ -32,12 +33,11 @@ public class ValidMeetingNonFunctionalValidator
   public boolean isValid(MeetingTransitionModel model, ConstraintValidatorContext context) {
     context.disableDefaultConstraintViolation();
 
-    boolean isValid = true;
+    List<Boolean> result = List.of(
+        validMeetingRoomAndAtendee(model, context),
+        validateOverlap(model, context));
 
-    isValid &= validMeetingRoomAndAtendee(model, context);
-    isValid &= validateOverlap(model, context);
-
-    return isValid;
+    return result.stream().allMatch(Boolean::valueOf);
   }
 
   protected boolean validMeetingRoomAndAtendee(MeetingTransitionModel model, ConstraintValidatorContext context) {
@@ -60,17 +60,13 @@ public class ValidMeetingNonFunctionalValidator
       return false;
     }
 
-    boolean isValid = true;
-
-    isValid &= validateNumAtendee(model, meetingRoom, context);
-
-    return isValid;
+    return validateNumAtendee(model, meetingRoom.get(), context);
   }
 
-  protected boolean validateNumAtendee(MeetingTransitionModel model, Optional<MeetingRoom> meetingRoom,
+  protected boolean validateNumAtendee(MeetingTransitionModel model, MeetingRoom meetingRoom,
       ConstraintValidatorContext context) {
     // new or meetingRoom or numAtendee changed
-    if (meetingRoom.get().getCapacity() < model.getMergedModel().getNumAtendee()) {
+    if (meetingRoom.getCapacity() < model.getMergedModel().getNumAtendee()) {
       context
           .buildConstraintViolationWithTemplate(
               "{com.yucatio.penguinmeetingroomprototype01.validation.ValidMeetingNonFunctional.numAtendeeExceedsCapacity.message}")
